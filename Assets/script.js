@@ -1,9 +1,3 @@
-// If I refresh the page, how do I make everything restart instead of stay in the middle?
-// The okay/cancel buttons of the window confirm don't always work.
-// Fix my cancel passwordLength part
-// How to make text go back to "Your Secure Password" when button is clicked again.
-// Do semicolons go at end of {} brackets?
-
 let generateBtn = document.querySelector("#generate");
 let passwordText = document.querySelector("#password");
 let lowerCaseChar = "abcdefghijklmnopqrstuvwxyz";
@@ -28,23 +22,19 @@ let randomspecial = getRandomChar(specialChar);
 
 
 function writePassword() {
-    /*passwordText.value = "Your Secure Password";*/
-    passwordLength = prompt("Enter numeric length of password between 8 and 128.");
-    // This ensures the user enters a numeric character.
-    while (isNaN(passwordLength)) {
-        alert("You must enter a numeric value.")
-        passwordLength = prompt("Enter numeric length of password between 8 and 128.");
-    };
+    // Clears out the password variable, so the new password can be input.
+    password = "";
+    passwordText.value = password;
 
-    /* Determines what happens if user cancels the password length selection.
-    if (passwordLength !== true) {
-      alert("We are sad to see you go.");
-      return writePassword();
-    } */
+    passwordLength = prompt("Enter numeric length of password between 8 and 128.");
 
     // This will ensure the user selects the correct password length.
-    while (passwordLength < 8 || passwordLength > 128) {
-        alert("Number entered is not in between 8 and 128!");
+    while (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
+        if (passwordLength === null) {
+            alert("We are sad to see you go.");
+            return;
+        }
+        alert("Number entered is not a numeric value or it is not in between 8 and 128!");
         passwordLength = prompt("Enter numeric length of password between 8 and 128.");
     }
     lowerCase = confirm("Do you want lowercase characters?");
